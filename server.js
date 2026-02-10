@@ -8,9 +8,17 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Connect to MongoDB
+console.log('⏳ Tentative de connexion à MongoDB...');
+if (!process.env.MONGODB_URI) {
+    console.error('❌ ERREUR: La variable MONGODB_URI n\'est pas définie sur Render !');
+}
+
 mongoose.connect(process.env.MONGODB_URI)
-    .then(() => console.log('✅ Connecté à MongoDB'))
-    .catch(err => console.error('❌ Erreur de connexion MongoDB:', err));
+    .then(() => console.log('✅ Connecté à MongoDB avec succès'))
+    .catch(err => {
+        console.error('❌ Erreur de connexion MongoDB:', err.message);
+        console.log('👉 Vérifiez que vous avez bien ajouté l\'IP 0.0.0.0/0 dans MongoDB Atlas > Network Access');
+    });
 
 // Define Client Schema
 const clientSchema = new mongoose.Schema({
