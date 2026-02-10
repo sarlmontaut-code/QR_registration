@@ -1,0 +1,18 @@
+{
+  "name": "qr-client-registration",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "start": "node server.js",
+  "test": "echo \"Error: no test specified\" && exit 1""keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "dotenv": "^17.2.4",
+    "exceljs": "^4.4.0",
+    "express": "^5.2.1",
+    "mongoose": "^9.2.0",
+    "qrcode": "^1.5.4"
+  }
+}
