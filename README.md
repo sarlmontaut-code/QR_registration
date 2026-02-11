@@ -5,7 +5,7 @@ Application web pour permettre aux clients d'un cordeur de tennis de s'enregistr
 ## Fonctionnalités
 - Formulaire d'enregistrement (Nom, Prénom, Âge, Téléphone).
 - Stockage sécurisé sur MongoDB Atlas.
-- Dashboard Admin (discret en bas de page) pour exporter les données en Excel.
+- Exportation des données sécurisée via un chemin secret.
 
 ## Installation Locale
 1. `npm install`

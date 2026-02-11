@@ -59,8 +59,9 @@ app.post('/register', async (req, res) => {
     }
 });
 
-// Route to export data to Excel
-app.get('/export', async (req, res) => {
+// Route to export data to Excel - Renamed for security
+const EXPORT_PATH = process.env.SECRET_EXPORT_PATH || '/export-valeurs-clients-75';
+app.get(EXPORT_PATH, async (req, res) => {
     try {
         const clients = await Client.find().sort({ registrationDate: -1 });
 
