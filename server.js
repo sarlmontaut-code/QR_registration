@@ -59,9 +59,36 @@ app.post('/register', async (req, res) => {
     }
 });
 
-// Route to export data to Excel - Renamed for security
-const EXPORT_PATH = process.env.SECRET_EXPORT_PATH || '/export-valeurs-clients-75';
-app.get(EXPORT_PATH, async (req, res) => {
+// --- Routes de Gestion Admin ---
+
+// Route pour servir la page dashboard secrète
+const SECRET_PATH = process.env.SECRET_EXPORT_PATH || '/export-valeurs-clients-75';
+app.get(SECRET_PATH, (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'admin-secret-page.html'));
+});
+
+// API pour récupérer tous les clients
+app.get('/api/clients', async (req, res) => {
+    try {
+        const clients = await Client.find().sort({ registrationDate: -1 });
+        res.json(clients);
+    } catch (error) {
+        res.status(500).send('Erreur lors de la récupération des clients');
+    }
+});
+
+// API pour supprimer un client
+app.delete('/api/clients/:id', async (req, res) => {
+    try {
+        await Client.findByIdAndDelete(req.params.id);
+        res.status(200).send('Client supprimé');
+    } catch (error) {
+        res.status(500).send('Erreur lors de la suppression');
+    }
+});
+
+// Route pour l'export Excel (déplacée en sous-route)
+app.get(`${SECRET_PATH}/download`, async (req, res) => {
     try {
         const clients = await Client.find().sort({ registrationDate: -1 });
 
